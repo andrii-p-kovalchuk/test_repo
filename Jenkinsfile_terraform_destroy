@@ -6,7 +6,9 @@ pipeline {
     // }
     stages {
         stage('Input') {
-            input(message: 'Do you realy want to start terraform destroy?', ok: 'Confirm')
+            steps {
+                input(message: 'Do you realy want to start terraform destroy?', ok: 'Confirm')
+            }
         }
         stage('Terraform destroy') {
             steps {
