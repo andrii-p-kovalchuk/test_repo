@@ -13,12 +13,8 @@ pipeline {
         stage('Terraform destroy') {
             steps {
                 script {
-                    if ("${params.DESTROY}" == 'Yes') {
-                        echo 'Terraform destroy'
-                        sh 'terraform destroy -auto-approve'
-                    } else {
-                        echo 'Jankins ended succeded!'
-                    }
+                    echo 'Terraform destroy'
+                    sh 'terraform destroy -auto-approve'
                 }
             }
         }
