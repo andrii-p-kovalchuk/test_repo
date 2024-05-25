@@ -11,6 +11,12 @@ pipeline {
                 sh 'terraform init'
             }
         }
+        stage('Terraform Plan') {
+            steps {
+                echo 'Terraform plan'
+                sh 'terraform plan'
+            }
+        }
         stage('Terraform destroy') {
             when {
                 environment(name: 'DESTROY', value: 'Yes')
