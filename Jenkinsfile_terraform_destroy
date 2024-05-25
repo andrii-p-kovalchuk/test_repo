@@ -1,0 +1,24 @@
+/* groovylint-disable CompileStatic, DuplicateStringLiteral */
+pipeline {
+    agent any
+    // parameters {
+    //     choice(name: 'DESTROY', choices: ['Yes', 'No'], description: 'Do you want to destroy terraform after building?')
+    // }
+    stages {
+        stage('Input') {
+            input(message: 'Do you realy want to start terraform destroy?', ok: 'Confirm')
+        }
+        stage('Terraform destroy') {
+            steps {
+                script {
+                    if ("${params.DESTROY}" == 'Yes') {
+                        echo 'Terraform destroy'
+                        sh 'terraform destroy -auto-approve'
+                    } else {
+                        echo 'Jankins ended succeded!'
+                    }
+                }
+            }
+        }
+    }
+}
