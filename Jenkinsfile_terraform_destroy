@@ -1,16 +1,14 @@
-/* groovylint-disable CompileStatic, DuplicateStringLiteral */
+/* groovylint-disable CompileStatic, DuplicateStringLiteral, LineLength */
 pipeline {
     agent any
-    // parameters {
-    //     choice(name: 'DESTROY', choices: ['Yes', 'No'], description: 'Do you want to destroy terraform after building?')
-    // }
+    parameters {
+        choice(name: 'DESTROY', choices: ['Yes', 'No'], description: 'Do you want to destroy terraform after building?')
+    }
     stages {
-        stage('Input') {
-            steps {
-                input(message: 'Do you realy want to start terraform destroy?', ok: 'Confirm')
-            }
-        }
         stage('Terraform destroy') {
+            when {
+                environment(name: 'DESTROY', value: 'Yes')
+            }
             steps {
                 script {
                     echo 'Terraform destroy'
