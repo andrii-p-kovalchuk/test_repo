@@ -7,7 +7,7 @@ pipeline {
     stages {
         stage('Terraform init') {
             steps {
-                dir('terraform-jenkins') {
+                dir('/var/lib/jenkins/workspace/terraform-jenkins') {
                     echo 'Terraform init'
                     sh 'terraform init'
                 }
@@ -15,7 +15,7 @@ pipeline {
         }
         stage('Terraform Plan') {
             steps {
-                dir('terraform-jenkins') {
+                dir('/var/lib/jenkins/workspace/terraform-jenkins') {
                     echo 'Terraform plan'
                     sh 'terraform plan'
                 }
@@ -27,7 +27,7 @@ pipeline {
             }
             steps {
                 script {
-                    dir('terraform-jenkins')
+                    dir('/var/lib/jenkins/workspace/terraform-jenkins')
                     echo 'Terraform destroy'
                     sh 'terraform destroy -auto-approve'
                 }

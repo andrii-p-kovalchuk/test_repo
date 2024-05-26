@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('Terraform init') {
             steps {
-                dir('terraform-jenkins') {
+                dir('/var/lib/jenkins/workspace/terraform-jenkins') {
                     echo 'Terraform init'
                     sh 'terraform init'
                 }
@@ -12,7 +12,7 @@ pipeline {
         }
         stage('Terraform format') {
             steps {
-                dir('terraform-jenkins') {
+                dir('/var/lib/jenkins/workspace/terraform-jenkins') {
                     echo 'Terraform format'
                     sh 'terraform fmt && terraform validate'
                 }
@@ -20,7 +20,7 @@ pipeline {
         }
         stage('Terraform Plan') {
             steps {
-                dir('terraform-jenkins') {
+                dir('/var/lib/jenkins/workspace/terraform-jenkins') {
                     echo 'Terraform plan'
                     sh 'terraform plan'
                 }
@@ -28,7 +28,7 @@ pipeline {
         }
         stage('Terraform apply') {
             steps {
-                dir('terraform-jenkins') {
+                dir('/var/lib/jenkins/workspace/terraform-jenkins') {
                     echo 'Terraform apply'
                     sh 'terraform apply -auto-approve'
                 }
