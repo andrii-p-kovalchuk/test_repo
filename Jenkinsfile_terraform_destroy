@@ -7,8 +7,10 @@ pipeline {
     stages {
         stage('Terraform destroy') {
             when {
-                environment name: 'DESTROY', value: true
-            }
+                allOf {
+                    environment ignoreCase: true, name: 'DESTROY', value: 'true'
+                }
+                }
             steps {
                 script {
                     dir('/var/lib/jenkins/workspace/terraform_start') {
