@@ -7,16 +7,18 @@ pipeline {
     stages {
         stage('Terraform init') {
             steps {
-                dir('terraform-jenkins')
-                echo 'Terraform init'
-                sh 'terraform init'
+                dir('terraform-jenkins') {
+                    echo 'Terraform init'
+                    sh 'terraform init'
+                }
             }
         }
         stage('Terraform Plan') {
             steps {
-                dir('terraform-jenkins')
-                echo 'Terraform plan'
-                sh 'terraform plan'
+                dir('terraform-jenkins') {
+                    echo 'Terraform plan'
+                    sh 'terraform plan'
+                }
             }
         }
         stage('Terraform destroy') {
