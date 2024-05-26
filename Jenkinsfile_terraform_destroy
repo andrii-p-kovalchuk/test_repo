@@ -2,7 +2,7 @@
 pipeline {
     agent any
     parameters {
-        booleanParam defaultValue: false, description: 'Do you really want to destroy infrastructure(By default "No" )?', name: 'DESTROY'
+        booleanParam defaultValue: false, description: 'Do you really want to destroy infrastructure (By default "No" )?', name: 'DESTROY'
     }
     stages {
         stage('Terraform destroy') {
@@ -10,7 +10,7 @@ pipeline {
                 allOf {
                     environment ignoreCase: true, name: 'DESTROY', value: 'true'
                 }
-                }
+            }
             steps {
                 script {
                     dir('/var/lib/jenkins/workspace/terraform_start') {
@@ -18,6 +18,11 @@ pipeline {
                         sh 'terraform destroy -auto-approve'}
                 }
             }
+        }
+    }
+    post {
+        always {
+            cleanWs()
         }
     }
 }
