@@ -7,12 +7,14 @@ pipeline {
     stages {
         stage('Terraform init') {
             steps {
+                dir('terraform-jenkins')
                 echo 'Terraform init'
                 sh 'terraform init'
             }
         }
         stage('Terraform Plan') {
             steps {
+                dir('terraform-jenkins')
                 echo 'Terraform plan'
                 sh 'terraform plan'
             }
@@ -23,6 +25,7 @@ pipeline {
             }
             steps {
                 script {
+                    dir('terraform-jenkins')
                     echo 'Terraform destroy'
                     sh 'terraform destroy -auto-approve'
                 }
