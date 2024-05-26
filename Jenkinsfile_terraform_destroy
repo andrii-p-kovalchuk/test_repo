@@ -5,29 +5,29 @@ pipeline {
         choice(name: 'DESTROY', choices: ['Yes', 'No'], description: 'Do you want to destroy terraform after building?')
     }
     stages {
-        stage('Terraform init') {
-            steps {
-                dir('/var/lib/jenkins/workspace/terraform-jenkins') {
-                    echo 'Terraform init'
-                    sh 'terraform init'
-                }
-            }
-        }
-        stage('Terraform Plan') {
-            steps {
-                dir('/var/lib/jenkins/workspace/terraform-jenkins') {
-                    echo 'Terraform plan'
-                    sh 'terraform plan'
-                }
-            }
-        }
+        // stage('Terraform init') {
+        //     steps {
+        //         dir('/var/lib/jenkins/workspace/terraform_start') {
+        //             echo 'Terraform init'
+        //             sh 'terraform init'
+        //         }
+        //     }
+        // }
+        // stage('Terraform Plan') {
+        //     steps {
+        //         dir('/var/lib/jenkins/workspace/terraform_start') {
+        //             echo 'Terraform plan'
+        //             sh 'terraform plan'
+        //         }
+        //     }
+        // }
         stage('Terraform destroy') {
             when {
                 environment(name: 'DESTROY', value: 'Yes')
             }
             steps {
                 script {
-                    dir('/var/lib/jenkins/workspace/terraform-jenkins')
+                    dir('/var/lib/jenkins/workspace/terraform_start')
                     echo 'Terraform destroy'
                     sh 'terraform destroy -auto-approve'
                 }
