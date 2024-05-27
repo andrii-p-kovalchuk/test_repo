@@ -24,15 +24,19 @@ pipeline {
             }
         }
         stage('Terraform apply') {
+            input {
+                message 'Ready to apply?'
+                ok 'Yes'
+            }
             steps {
-                parameters {
-                    booleanParam defaultValue: false, description: 'Do you really want to apply infrastructure (By default "No" )?', name: 'APPLY'
-                }
-                when {
-                    allOf {
-                        environment ignoreCase: true, name: 'APPLY', value: 'true'
-                    }
-                }
+                // parameters {
+                //     booleanParam defaultValue: false, description: 'Do you really want to apply infrastructure (By default "No" )?', name: 'APPLY'
+                // }
+                // when {
+                //     allOf {
+                //         environment ignoreCase: true, name: 'APPLY', value: 'true'
+                //     }
+                // }
                 script {
                     dir('/var/lib/jenkins/workspace/terraform_start/terraform') {
                         echo 'Terraform apply'
