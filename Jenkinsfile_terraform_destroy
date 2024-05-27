@@ -13,7 +13,7 @@ pipeline {
             }
             steps {
                 script {
-                    dir('/var/lib/jenkins/workspace/terraform_start') {
+                    dir('/var/lib/jenkins/workspace/terraform_start/terraform') {
                         echo 'Terraform destroy'
                         sh 'terraform destroy -auto-approve'}
                 }
