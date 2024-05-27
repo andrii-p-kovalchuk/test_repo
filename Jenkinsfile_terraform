@@ -5,7 +5,7 @@ pipeline {
         stage('Terraform init') {
             steps {
                 echo 'Terraform init'
-                sh 'cd terraform'
+                sh 'ls -al'
                 sh 'pwd'
                 sh 'terraform init'
             }
