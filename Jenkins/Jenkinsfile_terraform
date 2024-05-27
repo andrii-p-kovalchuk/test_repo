@@ -27,9 +27,9 @@ pipeline {
             input {
                 message 'Do you want to apply infrastructure?'
                 ok 'Yes'
-                // parameters {
-                //     booleanParam defaultValue: false, description: 'Do you really want to apply infrastructure (By default "No" )?', name: 'APPLY'
-                // }
+                parameters {
+                    booleanParam defaultValue: false, description: 'Do you really want to apply infrastructure (By default "No" )?', name: 'APPLY'
+                }
             }
             steps {
                 script {
