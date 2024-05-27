@@ -6,7 +6,6 @@ pipeline {
             steps {
                 echo 'Terraform init'
                 sh '''cd ./terraform
-                pwd
                 terraform init'''
             }
         }
@@ -14,7 +13,6 @@ pipeline {
             steps {
                 echo 'Terraform format'
                 sh '''cd ./terraform
-                pwd
                 terraform fmt && terraform validate'''
             }
         }
@@ -22,14 +20,12 @@ pipeline {
             steps {
                 echo 'Terraform plan'
                 sh '''cd ./terraform
-                pwd
                 terraform plan'''
             }
         }
         stage('Terraform apply') {
             steps {
                 sh '''cd ./terraform
-                pwd
                 terraform apply -auto-approve'''
             }
         }
