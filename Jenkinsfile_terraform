@@ -5,9 +5,9 @@ pipeline {
         stage('Terraform init') {
             steps {
                 echo 'Terraform init'
-                sh 'cd ./terraform'
-                sh 'pwd'
-                sh 'terraform init'
+                sh '''cd ./terraform
+                pwd
+                terraform init'''
             }
         }
         stage('Terraform format') {
