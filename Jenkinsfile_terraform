@@ -13,25 +13,24 @@ pipeline {
         stage('Terraform format') {
             steps {
                 echo 'Terraform format'
-                sh 'cd terraform'
-                sh 'pwd'
-                sh 'terraform fmt && terraform validate'
+                sh '''cd ./terraform
+                pwd
+                terraform fmt && terraform validate'''
             }
         }
         stage('Terraform Plan') {
             steps {
                 echo 'Terraform plan'
-                sh 'cd terraform'
-                sh 'pwd'
-                sh 'terraform plan'
+                sh '''cd ./terraform
+                pwd
+                terraform plan'''
             }
         }
         stage('Terraform apply') {
             steps {
-                echo 'Terraform apply'
-                sh 'cd terraform'
-                sh 'pwd'
-                sh 'terraform apply -auto-approve'
+                sh '''cd ./terraform
+                pwd
+                terraform init-auto-approve'''
             }
         }
     }
