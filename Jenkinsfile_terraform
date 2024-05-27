@@ -6,6 +6,7 @@ pipeline {
             steps {
                 echo 'Terraform init'
                 sh 'cd terraform'
+                sh 'pwd'
                 sh 'terraform init'
             }
         }
@@ -13,6 +14,7 @@ pipeline {
             steps {
                 echo 'Terraform format'
                 sh 'cd terraform'
+                sh 'pwd'
                 sh 'terraform fmt && terraform validate'
             }
         }
@@ -20,6 +22,7 @@ pipeline {
             steps {
                 echo 'Terraform plan'
                 sh 'cd terraform'
+                sh 'pwd'
                 sh 'terraform plan'
             }
         }
@@ -27,6 +30,7 @@ pipeline {
             steps {
                 echo 'Terraform apply'
                 sh 'cd terraform'
+                sh 'pwd'
                 sh 'terraform apply -auto-approve'
             }
         }
