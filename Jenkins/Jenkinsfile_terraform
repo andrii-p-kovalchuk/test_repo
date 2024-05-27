@@ -1,6 +1,9 @@
 /* groovylint-disable DuplicateStringLiteral, LineLength */
 pipeline {
     agent any
+    parameters {
+        booleanParam defaultValue: false, description: 'Do you really want to apply infrastructure (By default "No" )?', name: 'APPLY'
+    }
     stages {
         stage('Terraform format') {
             steps {
@@ -28,16 +31,13 @@ pipeline {
             //     message 'Ready to apply?'
             //     ok 'Yes'
             // }
+            when {
+                allOf {
+                    environment ignoreCase: true, name: 'APPLY', value: 'true'
+                }
+            }
             steps {
                 script {
-                    parameters {
-                        booleanParam defaultValue: false, description: 'Do you really want to apply infrastructure (By default "No" )?', name: 'APPLY'
-                    }
-                        when {
-                            allOf {
-                                environment ignoreCase: true, name: 'APPLY', value: 'true'
-                            }
-                        }
                     dir('/var/lib/jenkins/workspace/terraform_start/terraform') {
                         echo 'Terraform apply'
                         sh 'terraform apply -auto-approve'}
