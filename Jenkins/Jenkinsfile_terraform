@@ -2,18 +2,18 @@
 pipeline {
     agent any
     stages {
-        stage('Terraform init') {
-            steps {
-                echo 'Terraform init'
-                sh '''cd ./terraform
-                terraform init'''
-            }
-        }
         stage('Terraform format') {
             steps {
                 echo 'Terraform format'
                 sh '''cd ./terraform
                 terraform fmt && terraform validate'''
+            }
+        }
+        stage('Terraform init') {
+            steps {
+                echo 'Terraform init'
+                sh '''cd ./terraform
+                terraform init'''
             }
         }
         stage('Terraform Plan') {
@@ -24,9 +24,20 @@ pipeline {
             }
         }
         stage('Terraform apply') {
+            when {
+                allOf {
+                    environment ignoreCase: true, name: 'APPLY', value: 'true'
+                }
+            }
             steps {
-                sh '''cd ./terraform
-                terraform apply -auto-approve'''
+                parameters {
+                    booleanParam defaultValue: false, description: 'Do you really want to apply infrastructure (By default "No" )?', name: 'APPLY'
+                }
+                script {
+                    dir('/var/lib/jenkins/workspace/terraform_start/terraform') {
+                        echo 'Terraform apply'
+                        sh 'terraform apply -auto-approve'}
+                }
             }
         }
     }
