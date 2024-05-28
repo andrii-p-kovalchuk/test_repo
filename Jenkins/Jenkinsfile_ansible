@@ -1,12 +1,16 @@
 /* groovylint-disable CompileStatic, DuplicateStringLiteral */
 pipeline {
     agent any
+    environment {
+        ANSIBLE_VAULT_PASSWORD_FILE = credentials('ANSIBLE_VAULT_PASSWORD')
+        GOOGLE_APPLICATION_CREDENTIALS = credentials('GOOGLE_CREDENTIALS_ID')
+    }
     stages {
         stage('Ansible') {
             steps {
                 echo 'Ansible'
-                sh '''cd ./ansible
-                ansible-playbook first_playbook.yml'''
+                sh '''cd /var/lib/jenkins/workspace/terraform_start/ansible
+                ansible-playbook -i gcp-ansible.gcp.yml playbook.yml '''
             }
         }
     }
