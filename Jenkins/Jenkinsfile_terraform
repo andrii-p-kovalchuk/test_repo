@@ -2,18 +2,18 @@
 pipeline {
     agent any
     stages {
-        stage('Terraform format') {
-            steps {
-                dir('/var/lib/jenkins/workspace/terraform_start/terraform') {
-                        echo 'Terraform format'
-                        sh 'terraform fmt && terraform validate'}
-            }
-        }
         stage('Terraform init') {
             steps {
                 dir('/var/lib/jenkins/workspace/terraform_start/terraform') {
                         echo 'Terraform init'
                         sh 'terraform init'}
+            }
+        }
+        stage('Terraform format') {
+            steps {
+                dir('/var/lib/jenkins/workspace/terraform_start/terraform') {
+                        echo 'Terraform format'
+                        sh 'terraform fmt && terraform validate'}
             }
         }
         stage('Terraform Plan') {
