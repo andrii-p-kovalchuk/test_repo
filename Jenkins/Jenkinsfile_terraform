@@ -9,28 +9,28 @@ pipeline {
         stage('Terraform format') {
             steps {
                 echo 'Terraform format'
-                dir(${ WORKING_DIR }) {
+                dir("${WORKING_DIR }") {
                         sh 'terraform fmt'}
             }
         }
         stage('Terraform init') {
             steps {
                 echo 'Terraform init'
-                dir(${ WORKING_DIR }) {
+                dir("${WORKING_DIR }") {
                         sh 'terraform init'}
             }
         }
         stage('Terraform validate') {
             steps {
                 echo 'Terraform validate'
-                dir(${ WORKING_DIR }) {
+                dir("${WORKING_DIR }") {
                           sh 'terraform validate'}
             }
         }
         stage('Terraform Plan') {
             steps {
                 echo 'Terraform plan'
-                dir(${ WORKING_DIR }) {
+                dir("${WORKING_DIR }") {
                         sh 'terraform plan'}
             }
         }
@@ -45,7 +45,7 @@ pipeline {
             steps {
                 script {
                     echo 'Terraform apply'
-                    dir(${ WORKING_DIR }) {
+                    dir("${WORKING_DIR }") {
                         sh 'terraform apply -auto-approve'}
                 }
             }
