@@ -9,7 +9,7 @@ pipeline {
         stage('Ansible') {
             steps {
                 echo 'Ansible'
-                sh '''cd /var/lib/jenkins/workspace/terraform_start/ansible
+                sh '''cd /var/lib/jenkins/workspace/Ansible/ansible
                 ansible-playbook -i gcp-ansible.gcp.yml playbook.yml '''
             }
         }
