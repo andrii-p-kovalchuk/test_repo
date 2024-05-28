@@ -10,7 +10,7 @@ pipeline {
             steps {
                 echo 'Ansible'
                 dir('/var/lib/jenkins/workspace/Ansible/ansible') {
-                        sh 'ansible-playbook -i gcp-ansible.gcp.yml --vault-password-file ${ANSIBLE_VAULT_PASSWORD_FILE} playbook.yml'}
+                        sh "ansible-playbook -i gcp-ansible.gcp.yml --vault-password-file ${ANSIBLE_VAULT_PASSWORD_FILE} playbook.yml"}
             }
         }
     }
